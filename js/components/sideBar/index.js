@@ -1,8 +1,9 @@
 
 import React, { Component } from 'react';
+import { TouchableOpacity, Image, AsyncStorage, Alert } from 'react-native';
 import { connect } from 'react-redux';
 import { Content, Text, ListItem } from 'native-base';
-import { Actions } from 'react-native-router-flux';
+import { Actions, ActionConst } from 'react-native-router-flux';
 
 import { closeDrawer } from '../../actions/drawer';
 import { setIndex } from '../../actions/list';
@@ -21,14 +22,35 @@ class SideBar extends Component {
     this.props.navigateTo(route, 'home');
   }
 
+  async userLogout() {
+    console.log('logout AsyncStorage error: ');
+    try {
+      await AsyncStorage.removeItem('intialEmail');
+      this.props.closeDrawer();
+      Actions.login({ type: ActionConst.RESET }); 
+      //Alert.alert('Logout Success!');     
+    } catch (error) {
+      console.log('AsyncStorage error: ' + error.message);
+    };
+  }
+
   render() {
     return (
       <Content style={styles.sidebar} >
-        <ListItem button onPress={() => { Actions.home(); this.props.closeDrawer(); }} >
+        {/*
+        <ListItem button onPress={() => { Actions.leaderBoard(); this.props.closeDrawer(); }} >
           <Text>Home</Text>
         </ListItem>
-        <ListItem button onPress={() => { Actions.blankPage(); this.props.closeDrawer(); }} >
-          <Text>Blank Page</Text>
+        <ListItem button onPress={() => { Actions.contactUs(); this.props.closeDrawer(); }} >
+          <Text>Contact Us</Text>
+        </ListItem>
+        */}
+        <ListItem button onPress={() => { Actions.profile(); this.props.closeDrawer(); }} >
+          <Text>Your account</Text>
+        </ListItem>
+
+        <ListItem button transparent onPress={() => this.userLogout()} >
+          <Text>Sign out</Text>
         </ListItem>
       </Content>
     );

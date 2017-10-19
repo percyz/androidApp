@@ -1,0 +1,9 @@
+$ code-push app add geia-android1 android react-native
+Successfully added the "geia-android1" app, along with the following default deployments:
+┌────────────┬──────────────────────────────────────────────────────────────────┐
+│ Name       │ Deployment Key                                                   │
+├────────────┼──────────────────────────────────────────────────────────────────┤
+│ Production │ SeFDOWxpcOvK8xXwpdByZ1gQwBAMe701fc78-f2e4-47bf-96ed-ac50dfd6b156 │
+├────────────┼──────────────────────────────────────────────────────────────────┤
+│ Staging    │ j6mfufxuY_pn1harLXXp5MaRxMtve701fc78-f2e4-47bf-96ed-ac50dfd6b156 │
+└────────────┴──────────────────────────────────────────────────────────────────

@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { StyleSheet } from 'react-native';
 import CodePush from 'react-native-code-push';
 
-import { Container, Content, Text, View } from 'native-base';
+import { Container, Content, Text, View, Spinner } from 'native-base';
 import Modal from 'react-native-modalbox';
 
 import AppNavigator from './AppNavigator';
@@ -37,6 +37,7 @@ class App extends Component {
     };
   }
 
+/*
   componentDidMount() {
     CodePush.sync({ updateDialog: true, installMode: CodePush.InstallMode.IMMEDIATE },
       (status) => {
@@ -61,12 +62,22 @@ class App extends Component {
       }
     );
   }
+*/
+
+  componentDidMount() {
+    CodePush.sync({updateDialog: true, installMode: CodePush.InstallMode.IMMEDIATE})
+      .then(update => console.log('update', update))
+      .catch(err => console.log('update error', err));
+  }
 
   render() {
+    console.log("app load");
     if (this.state.showDownloadingModal) {
-      return (
+      return (    
         <Container theme={theme} style={{ backgroundColor: theme.defaultBackgroundColor }}>
           <Content style={styles.container}>
+            <Spinner />
+             {/*
             <Modal
               style={[styles.modal, styles.modal1]}
               backdrop={false}
@@ -113,8 +124,10 @@ class App extends Component {
                 }
               </View>
             </Modal>
+            */}
           </Content>
         </Container>
+        
       );
     }
 

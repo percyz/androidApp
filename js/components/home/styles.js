@@ -6,6 +6,11 @@ export default {
   container: {
     backgroundColor: '#FBFAFA',
   },
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    paddingBottom: 15,
+  },
   row: {
     flex: 1,
     alignItems: 'center',
@@ -18,4 +23,8 @@ export default {
   mt: {
     marginTop: 18,
   },
+  logo: {
+    height: 50,
+    width: 140,
+  }
 };

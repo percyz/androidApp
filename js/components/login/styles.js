@@ -1,4 +1,5 @@
-
+//import styles from './styles';
+GLOBAL = require('../../globals');
 const React = require('react-native');
 
 const { StyleSheet, Dimensions } = React;
@@ -16,23 +17,42 @@ export default {
   },
   shadow: {
     flex: 1,
-    width: null,
-    height: null,
+    width: GLOBAL.WIDTH,
+    height: GLOBAL.HEIGHT / 1.04,
   },
   bg: {
     flex: 1,
-    marginTop: deviceHeight / 1.75,
-    paddingTop: 20,
+    flexDirection: 'column',
+    marginTop: deviceHeight / 2,
+    paddingTop: 0,
     paddingLeft: 10,
     paddingRight: 10,
-    paddingBottom: 30,
+    paddingBottom: 10,
     bottom: 0,
   },
+  title: {
+    flex: 1,
+    textAlign: 'center',
+    fontSize: 20,
+  },
+  paragraph: {
+    flex: 2,
+    textAlign: 'center',
+    alignItems: 'center',
+  },
   input: {
+    flex: 1,
     marginBottom: 20,
   },
-  btn: {
-    marginTop: 20,
+  forgetPw: {
+    flex: 1,
     alignSelf: 'center',
+    color: '#a5a5a5',
+  },
+  btn: {
+    flex: 1,
+    marginTop: 10,
+    alignSelf: 'center',
+    //backgroundColor: '#74ba00',
   },
 };

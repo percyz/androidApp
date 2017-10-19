@@ -1,10 +1,15 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.nativestarterkit"
-    android:versionCode="1"
+    package="com.geiaapp"
+    android:versionCode="10"
     android:versionName="1.0">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <uses-sdk
         android:minSdkVersion="16"
@@ -14,19 +19,34 @@
       android:name=".MainApplication"
       android:allowBackup="true"
       android:label="@string/app_name"
-      android:icon="@mipmap/ic_launcher"
-      android:theme="@style/AppTheme">
-      <activity
-        android:name=".MainActivity"
-        android:label="@string/app_name"
-        android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
-        android:windowSoftInputMode="adjustResize">
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
-      </activity>
-      <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />
-    </application>
+      android:icon="@mipmap/ic_geia_launcher"
+      android:theme="@style/AppTheme"
+      android:imeOptions="actionNext"
+      android:singleLine="true">
 
+      <activity
+        android:name=".SplashActivity"
+        android:label="@string/app_name"
+          android:exported="true"
+          android:theme="@style/SplashTheme">
+
+      </activity>
+
+        <activity android:name=".MainActivity"
+            android:theme="@style/AppTheme"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+            android:windowSoftInputMode="adjustResize|stateHidden" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            </activity>
+      <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />
+     
+        <meta-data
+        android:name="com.google.android.geo.API_KEY"
+        android:value="AIzaSyAcpKIeqCjrdhE98diFC839m1PITDVFfLM" />
+
+    </application>
+    
 </manifest>

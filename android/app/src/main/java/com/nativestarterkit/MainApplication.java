@@ -1,13 +1,15 @@
-package com.nativestarterkit;
+package com.geiaapp;
 
 import android.app.Application;
 
+import com.airbnb.android.react.maps.MapsPackage;
 import com.facebook.react.ReactApplication;
 import com.microsoft.codepush.react.CodePush;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
+import com.eguma.barcodescanner.BarcodeScannerPackage;
 
 import java.util.Arrays;
 import java.util.List;
@@ -30,7 +32,9 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
-            new CodePush(null, getApplicationContext(), BuildConfig.DEBUG)
+            new BarcodeScannerPackage(),
+            new CodePush("j6mfufxuY_pn1harLXXp5MaRxMtve701fc78-f2e4-47bf-96ed-ac50dfd6b156", MainApplication.this, BuildConfig.DEBUG),
+              new MapsPackage()
       );
     }
   };

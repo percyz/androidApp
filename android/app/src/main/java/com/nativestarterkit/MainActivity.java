@@ -1,4 +1,4 @@
-package com.nativestarterkit;
+package com.geiaapp;
 
 import com.facebook.react.ReactActivity;
 
