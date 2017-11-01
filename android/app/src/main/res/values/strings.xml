@@ -1,4 +1,6 @@
 <resources>
     <string moduleConfig="true" name="reactNativeCodePush_androidDeploymentKey">j6mfufxuY_pn1harLXXp5MaRxMtve701fc78-f2e4-47bf-96ed-ac50dfd6b156</string>
     <string name="app_name">Geia Rewards</string>
+    <string name="facebook_app_id">1312377785540416</string>
+    <string name="fb_login_protocol_scheme">fb1312377785540416</string>
 </resources>

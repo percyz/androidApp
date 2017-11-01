@@ -27,7 +27,7 @@ export default{
     zIndex: 1,
     //width: 30,
     marginLeft: 5,
-    backgroundColor: 'transparent', 
+    backgroundColor: 'transparent',
     //backgroundColor: '#515150',
   },
   rightCard: {
@@ -70,15 +70,16 @@ export default{
     resizeMode: 'stretch',
     marginTop: -5,
     marginRight: -10,
+    backgroundColor: 'transparent'
   },
   scoreFont: {
-    fontSize: 25,
+    fontSize: 20,
     fontWeight: 'bold',
     paddingLeft: 30,
     color: '#ffffff'
   },
   scoreFontSelf: {
-    fontSize: 18,
+    fontSize: 15,
     fontWeight: 'bold',
     marginRight: -20,
     color: '#ffffff'

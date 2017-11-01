@@ -49,7 +49,6 @@ class OrgMap extends Component {
         results: {
           items: []
         },
-        orgNames: [],
         region: {
             latitude: null,//-45.8669784,
             longitude: null,//170.51735800000006,
@@ -59,7 +58,8 @@ class OrgMap extends Component {
         initialLatitude: -45.8788,
         initialLongitude: 170.5028,
         locationError: null,
-        circleRadius: 100
+        circleRadius: 100,
+        orgNames: []
       };
   }
 
@@ -81,24 +81,24 @@ class OrgMap extends Component {
         { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 },
       );
 
-      //GET 
-      fetch("https://geia-app.herokuapp.com/orgs", {
+      //GET
+      fetch("https://iosgeia.herokuapp.com/orgs", {
               method: "GET",
               mode: "cors",
               headers: {
-                  "Accept": "application/json",  
+                  "Accept": "application/json",
                   "Content-Type": "application/x-www-form-urlencoded"
                   //"Content-Type": "application/json"
               },
 
-              //body: requestBodyPoint 
+              //body: requestBodyPoint
       }).then((res) => {
           console.log("fetch request ", res);
            console.log("fetch request ", res.ok);
             if(res.ok){
                 res.json().then((json) => {
                    console.info(json);
-                   this.setState({orgInfo:json}); 
+                   this.setState({orgInfo:json});
                    orgInfoComplete = json;
                    console.log("orgInfo",this.state.orgInfo.length);
                    if(this.state.orgInfo.length > 2){
@@ -110,7 +110,7 @@ class OrgMap extends Component {
                 });
             }else{
             Alert.alert("server is busying, try again later 1");
-            console.log("server is busying, try again later 1");             
+            console.log("server is busying, try again later 1");
             }
       })
       .catch(function(err){
@@ -159,7 +159,7 @@ class OrgMap extends Component {
       console.log("selectedInd",this.state.selectedInd);
 
       if(this.state.selectedNam.trim() != ''){
-        // if user search organisation name, don't consider the location&industry, give him a specific result 
+        // if user search organisation name, don't consider the location&industry, give him a specific result
           for(var i = 0; i < orgInfoComplete.length; i++){
              if(this.state.selectedNam == orgInfoComplete[i].name){
               orgInfoArray.push(orgInfoComplete[i]);
@@ -178,7 +178,7 @@ class OrgMap extends Component {
               this.setState({selectedCount: this.state.selectedCount + 1});
           }else{
               for(var i = 0; i < orgInfoComplete.length; i++){
-                  regArray.push(i);     
+                  regArray.push(i);
               };
           };
 
@@ -191,7 +191,7 @@ class OrgMap extends Component {
               this.setState({selectedCount: this.state.selectedCount + 1});
           }else{
               for(var i = 0; i < orgInfoComplete.length; i++){
-                  citArray.push(i);     
+                  citArray.push(i);
               }
           };
 
@@ -204,7 +204,7 @@ class OrgMap extends Component {
               this.setState({selectedCount: this.state.selectedCount + 1});
           }else{
               for(var i = 0; i < orgInfoComplete.length; i++){
-                  indArray.push(i);     
+                  indArray.push(i);
               }
           };
 
@@ -212,7 +212,7 @@ class OrgMap extends Component {
           console.log("selectedcit array",citArray);
           console.log("selectedInd array",indArray);
 
-          var resultA = citArray.filter(val => regArray.includes(val)); 
+          var resultA = citArray.filter(val => regArray.includes(val));
           var resultB = resultA.filter(val => indArray.includes(val));
 
           console.log("selectedcit resultA",resultA);
@@ -221,7 +221,7 @@ class OrgMap extends Component {
           for(var i = 0; i < resultB.length; i++){
             orgInfoArray.push(orgInfoComplete[resultB[i]]);
           };
-      } 
+      }
 
       if(orgInfoArray.length >= 1){
         this.setState({orgInfo: orgInfoArray,
@@ -229,7 +229,7 @@ class OrgMap extends Component {
                        selectedReg: '',
                        selectedCit: '',
                        selectedInd: '',
-                       region:{latitude:orgInfoArray[0].latitude, longitude:orgInfoArray[0].longitude, 
+                       region:{latitude:orgInfoArray[0].latitude, longitude:orgInfoArray[0].longitude,
                                latitudeDelta: 0.0922, longitudeDelta: 0.0421}
                      });
 
@@ -243,7 +243,7 @@ class OrgMap extends Component {
             });
       }
       console.log("search result:", orgInfoArray);
-      //const selected = this.state.selected.map((val, index) => <Item key={index} label={val} value={val} />); 
+      //const selected = this.state.selected.map((val, index) => <Item key={index} label={val} value={val} />);
     }
 
   findFilm(selectedNam) {
@@ -271,7 +271,7 @@ class OrgMap extends Component {
     const itemsInd = GLOBAL.INDUSTRY.map((val) => <Item key={val} label={val} value={val} color='black' />);
     const itemsRad = GLOBAL.RADIUS.map((val) => <Item key={val} label={val+' meters'} value={val} />);
 
-    const orgMapData = [];
+    const orgInfoData = [];
     for(var i = 0; i < this.state.orgInfo.length; i++){
 
       var marker = '';
@@ -283,7 +283,7 @@ class OrgMap extends Component {
         marker = self;
       }
 
-      orgMapData.push({
+      orgInfoData.push({
         latitude:this.state.orgInfo[i].latitude,
         longitude:this.state.orgInfo[i].longitude,
         title:this.state.orgInfo[i].name,
@@ -295,7 +295,7 @@ class OrgMap extends Component {
     const orgNames = this.findFilm(selectedNam);
     const comp = (a, b) => a.toLowerCase().trim() === b.toLowerCase().trim();
 
-    console.log("orgMapData", orgMapData);
+    console.log("orgInfoData", orgInfoData);
 
     return (
       <Container style={styles.container}>
@@ -337,7 +337,7 @@ class OrgMap extends Component {
                     selectedValue={this.state.selectedReg}
                     onValueChange={this.onRegChange}>
                     {itemsReg}
-                </Picker>  
+                </Picker>
              </Item>
              <Item>
                 <Icon name="search" />
@@ -349,12 +349,12 @@ class OrgMap extends Component {
                     selectedValue={this.state.selectedCit}
                     onValueChange={this.onCitChange}>
                     {itemsCit}
-                </Picker>  
+                </Picker>
              </Item>
            </Header>
            <Header searchBar rounded style={{backgroundColor: '#5cb85c'}}>
            <Item >
-            <Icon name="search" />     
+            <Icon name="search" />
             <Picker
                 style={styles.searchBoxIndustry}
                 placeholder="Search Industry"
@@ -363,7 +363,7 @@ class OrgMap extends Component {
                 selectedValue={this.state.selectedInd}
                 onValueChange={this.onIndChange}>
                 {itemsInd}
-            </Picker>    
+            </Picker>
            </Item>
            </Header>
 
@@ -374,9 +374,9 @@ class OrgMap extends Component {
            <Text></Text>
 {/*
            <Header searchBar rounded style={{backgroundColor: '#5cb85c'}}>
-             
+
            <Item >
-            <Icon name="search" />     
+            <Icon name="search" />
             <Picker
                 style={styles.searchBoxIndustry}
                 placeholder="Search Organisations around you"
@@ -387,7 +387,7 @@ class OrgMap extends Component {
                 >
                 <Item key='0' label='Search organisations around you' value='100' />
                 {itemsRad}
-            </Picker>    
+            </Picker>
            </Item>
            </Header>
 */}
@@ -397,17 +397,17 @@ class OrgMap extends Component {
           <Slider
             //style={{width:200}}
             value={this.state.circleRadius}
-            onValueChange={(circleRadius) => this.setState({circleRadius})} 
+            onValueChange={(circleRadius) => this.setState({circleRadius})}
             maximumValue={10000}
             thumbTintColor={'#5cb85c'}
             minimumTrackTintColor={'#5cb85c'}
             step={10}
             />
           <Text style={{flex: 1, textAlign: 'center'}}>Find organisations around you: {this.state.circleRadius} meters</Text>
-          
+
         </View>
 
-        {!this.state.viewLoaded ? <Spinner /> : 
+        {!this.state.viewLoaded ? <Spinner /> :
         <View style={styles.mapView}>
         <MapView
             style={styles.mapContent}
@@ -418,14 +418,14 @@ class OrgMap extends Component {
             center={{latitude: this.state.initialLatitude, longitude: this.state.initialLongitude}}
             radius={this.state.circleRadius}
             fillColor="rgba(20, 140, 255, 0.2)"
-            strokeColor="rgba(136, 180, 252, 0.2)" 
+            strokeColor="rgba(136, 180, 252, 0.2)"
         />
           <MapView.Marker
             key={'Your Location'}
             coordinate={{latitude:this.state.initialLatitude, longitude:this.state.initialLongitude}}
             title={'Your Location'}
           />
-          {orgMapData.map(marker => (
+          {orgInfoData.map(marker => (
                 <MapView.Marker
                   key={marker.title}
                   coordinate={{latitude: marker.latitude, longitude: marker.longitude}}

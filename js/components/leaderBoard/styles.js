@@ -1,72 +1,79 @@
 const React = require('react-native');
-GLOBAL = require('../../globals');
 
-const { StyleSheet } = React;
+const { StyleSheet, Dimensions } = React;
+
+const deviceHeight = Dimensions.get('window').height;
+
+var btnNum = '';
+if(deviceHeight > 600){
+  btnNum = 7;
+}else {
+  btnNum = 8;
+}
 
 export default{
   container: {
     backgroundColor: '#FBFAFA',
+    height: deviceHeight
   },
-
-  backgroundImage: {
-    width: GLOBAL.WIDTH / 1,
-    height: GLOBAL.HEIGHT / 1.05,
-  },
-
   title: {
+    flex: 1,
     fontSize: 24,
     fontWeight: 'bold',
     paddingBottom: 15,
-    textAlign: 'center',
   },
-  mapView: {
-    flex: 1, 
-    flexDirection: 'row',
-    //alignContent: 'center',  
-    justifyContent: 'center',
-    paddingTop: 5
+  header: {
+    backgroundColor: GLOBAL.COLOR.GREEN
   },
-  mapContent: {
-    width: GLOBAL.WIDTH / 1.05,
-    height: GLOBAL.HEIGHT / 2.6,
-  },
-  buttonlink: {
-    height: 150,
-  },
-  searchBoxLocation: {
-    width: GLOBAL.WIDTH / 2.4,
-  },
-  searchBoxIndustry: {
-    width: GLOBAL.WIDTH / 1.16,
-  },
-  searchBoxName: {
-     width: GLOBAL.WIDTH / 1.5,
-     color: 'black',
-  },
-  arrowDropdown: {
-    paddingRight:30
-  },
-  autocompleteContainer: {
+  subContainer: {
+    flexDirection:'column',
     flex: 1,
-    //backgroundColor: 'white', 
-    //height: 'auto',
-    //left: 0,
-    position: 'relative',
-    //right: 0,
-    //top: 0,
-    zIndex: 1,
-    paddingTop: 5,
+    backgroundColor: GLOBAL.COLOR.GRAY
   },
-  autocompleteInputContainer: {
-    backgroundColor: 'white'
+  subTitle:{
+    alignItems:'center',
+    flexDirection:'row',
+    height: 35,
   },
-  itemText: {
-    fontSize: 18,
-    margin: 2
-    //width: GLOBAL.WIDTH / 1.32,
+  moreText: {
+    alignItems:'center',
+    flexDirection:'row',
+    //height: 80,
   },
-  searchBoxIndustryNew: {
-    color: 'black',
-    width: GLOBAL.WIDTH / 1.2,
-  }
+  gray: {
+    marginRight: 'auto',
+    padding: 5,
+    marginLeft: 15,
+  },
+  items: {
+    flexDirection: 'row',
+    backgroundColor: 'white',
+    marginTop:5,
+  },
+  reg: {
+    flex:1,
+    backgroundColor: 'white',
+    marginBottom: 2,
+    alignItems: 'flex-start'
+  },
+  newScan: {
+    flex: 1,
+    bottom: 40,
+    //width: GLOBAL.WIDTH / 6,
+    //height: GLOBAL.HEIGHT / 10,
+    alignItems: 'center',
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    marginTop: GLOBAL.HEIGHT / btnNum,
+  },
+  save: {
+    width: GLOBAL.WIDTH,
+    backgroundColor: GLOBAL.COLOR.BLUE
+  }, 
+  headerBody: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 };

@@ -15,11 +15,9 @@ export default{
   mapView: {
     flex: 1, 
     flexDirection: 'row',
-    //alignContent: 'center',  
+    //alignContent: 'center', 
     justifyContent: 'center',
-    paddingTop: 5,
-    //width: GLOBAL.WIDTH / 1.05,
-    //height: GLOBAL.HEIGHT / 2.2,
+    paddingTop: 5
   },
   mapContent: {
     width: GLOBAL.WIDTH / 1.05,

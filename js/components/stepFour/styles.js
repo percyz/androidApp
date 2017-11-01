@@ -90,6 +90,17 @@ export default {
   btnView: {
     marginTop: GLOBAL.HEIGHT / btnNum,
   },
+  btnFb: {
+    flex: 1,
+    //marginTop: 10,
+    //alignSelf: 'center',
+    //backgroundColor: GLOBAL.COLOR.GREEN,
+    //borderRadius:10,
+    //borderWidth: 1,
+    //borderColor: '#fff',
+    //margin: 'auto',
+    //width: 200
+  },
   btn: {
     flex: 1,
     marginTop: 10,

@@ -8,37 +8,55 @@ const deviceHeight = Dimensions.get('window').height;
 
 export default {
   container: {
-    position: 'absolute',
+    flex: 1,
+    flexDirection:'column',
+    //alignItems:'center',
     top: 0,
     bottom: 0,
     left: 0,
     right: 0,
-    backgroundColor: '#FBFAFA',
+    width: GLOBAL.WIDTH,
+    height: GLOBAL.HEIGHT,
+    backgroundColor: GLOBAL.COLOR.GREEN,
   },
   shadow: {
-    flex: 1,
-    width: GLOBAL.WIDTH,
-    height: GLOBAL.HEIGHT / 1.04,
+    marginTop: 20,
+    marginBottom: 20,
+    //flex: 1,
+    //width: GLOBAL.WIDTH / 2.55,
+    //height: GLOBAL.HEIGHT / 4.5,
+    //alignItems: 'center'
   },
   bg: {
     flex: 1,
     flexDirection: 'column',
-    marginTop: deviceHeight / 2,
+    //marginTop: deviceHeight / 2,
     paddingTop: 0,
     paddingLeft: 10,
     paddingRight: 10,
     paddingBottom: 10,
     bottom: 0,
+    alignItems: 'center',
   },
   title: {
     flex: 1,
+    marginTop: GLOBAL.HEIGHT / 5,
+  },
+  paragraphTitle: {
+    flex: 2,
     textAlign: 'center',
-    fontSize: 20,
+    alignItems: 'center',
+    marginTop: 10,
+    color: 'white',
+    fontSize: 30
   },
   paragraph: {
     flex: 2,
     textAlign: 'center',
     alignItems: 'center',
+    marginTop: 10,
+    color: 'white',
+    fontSize:GLOBAL.BIG,
   },
   input: {
     flex: 1,
@@ -53,6 +71,15 @@ export default {
     flex: 1,
     marginTop: 10,
     alignSelf: 'center',
-    //backgroundColor: '#74ba00',
+    backgroundColor: GLOBAL.COLOR.GREEN,
+    borderRadius:10,
+    borderWidth: 1,
+    borderColor: '#fff',
+    margin: 'auto',
+    width: 200
   },
+  btnChild: {
+    flex: 1,
+    textAlign: 'center'
+  }
 };

@@ -8,7 +8,6 @@ import { Container, Header, Footer, FooterTab, Title, Content, Text, Button,
 
 import { openDrawer } from '../../actions/drawer';
 import NewFooter from '../newFooter';
-import NewHeader from '../newHeader';
 import styles from './styles';
 
 const logo = require('../../../images/newlogo.png');
@@ -45,21 +44,22 @@ class OrgProfile extends Component {
   }
 
     componentWillMount() {
+      const { params } = this.props.navigation.state;
+      console.log("Profile",params.id)
+    if(params.id != ''){
+      console.log("props get id value", params.id);
 
-    if(this.props.id != ''){
-      console.log("props get id value", this.props.id);
-    
     //POST
-      const i = encodeURIComponent(this.props.id);
-      const requestBodyPoint = `id=${i}`; 
+      const i = encodeURIComponent(params.id);
+      const requestBodyPoint = `id=${i}`;
       console.log("requestBodyPoint info: ", requestBodyPoint);
       return fetch("https://geia-app.herokuapp.com/orgs/profile", {
               method: "POST",
               mode: "cors",
               headers: {
-                  "Accept": "application/json",  
+                  "Accept": "application/json",
                   "Content-Type": "application/x-www-form-urlencoded"
-                  //"Content-Type": "application/json" 
+                  //"Content-Type": "application/json"
               },
 
               body: requestBodyPoint
@@ -67,7 +67,7 @@ class OrgProfile extends Component {
               console.log("fetch request ", JSON.stringify(res.ok));
               if(res.ok){
                   res.json().then((json) => {
-                      console.info(json); 
+                      console.info(json);
                       this.setState({
                             orgName: json.name,
                             city: json.address.city,
@@ -81,7 +81,7 @@ class OrgProfile extends Component {
                             viewLoaded: true
                       });
                   });
-                  //console.info("waiting props name1",this.state.orgName); 
+                  //console.info("waiting props name1",this.state.orgName);
               }else{
           Alert.alert("server is busying, try again later");
         }
@@ -100,22 +100,20 @@ class OrgProfile extends Component {
   }
 
   render() {
-
     const { props: { name, index, list } } = this;
     console.log("get the data: ", this.state.orgName, this.state.city, this.state.viewLoaded);
 
     return (
       <Container style={styles.container}>
 
-        <NewHeader />
         <Content padder>
-          {/* 
-          <Text style={styles.title}>Organisation id: {this.props.id}</Text> 
+          {/*
+          <Text style={styles.title}>Organisation id: {params.id}</Text>
           <Image source={logo} style={{height:50, width:50}} />
 
                     <Card style={{flex: 1}}>
                 <CardItem>
-                  <Left>                  
+                  <Left>
                     <Thumbnail source={{uri:this.state.logo}} style={{height:50, width:50}}/>
                     <Body>
                       <Text>{this.state.orgName}</Text>
@@ -188,7 +186,12 @@ class OrgProfile extends Component {
           </View>
           }
         </Content>
-        <NewFooter />
+        <NewFooter
+          navigate={this.props.navigation.navigate}
+          destinationLeaderboard="LeaderBoard"
+          destinationScanner="Scanner"
+          destinationProfile="Profile"
+        />
       </Container>
     );
   }

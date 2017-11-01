@@ -2,11 +2,12 @@
 import React, { Component } from 'react';
 import { TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
-import { Actions, ActionConst } from 'react-native-router-flux';
-import { Container, Footer, FooterTab, Badge, Content, Text, Button, Icon, Body } from 'native-base';
+//import { Actions, ActionConst } from 'react-native-router-flux';
+import { Container, Footer, FooterTab, Badge, Content, Text, Button, Icon, Body, View, Right, Left } from 'native-base';
 
 import { openDrawer } from '../../actions/drawer';
 import styles from './styles';
+//import { Tabs } from "../../Routers/FooterRoute";
 
 class NewFooter extends Component {
 
@@ -17,6 +18,15 @@ class NewFooter extends Component {
     openDrawer: React.PropTypes.func,
   }
 
+  leaderBoard(){
+    alert("leaderboard called");
+    this.props.navigation.navigate("Leaderboard")
+  }
+
+  scanner(){
+    alert("scanner called");
+  }
+
   render() {
 
     const { props: { name, index, list } } = this;
@@ -24,30 +34,18 @@ class NewFooter extends Component {
     return (
         <Footer>
             <FooterTab style={styles.newfooter}>
-                
-                <Button onPress={() => Actions.scanner({ type: ActionConst.RESET })} >
-                    <Icon name="camera" />
+                <Button onPress={() => this.props.navigate(this.props.destinationLeaderboard)} >
+                    <Icon name="ios-apps" />
+                    <Text>Leaderboard</Text>
+                </Button>
+                <Button onPress={() => this.props.navigate(this.props.destinationProfile)} >
+                    <Icon name="ios-home" />
+                    <Text>Home</Text>
+                </Button>
+                <Button onPress={() => this.props.navigate(this.props.destinationScanner)} >
+                    <Icon name="ios-camera" />
                     <Text>Scanner</Text>
                 </Button>
-
-                <Button onPress={() => Actions.leaderBoard()} >
-                    <Icon name="apps" />
-                    <Text>Leaderboard</Text> 
-                </Button>
-                {/*
-                <Button badge vertical onPress={() => Actions.orgMap()}>
-                  
-                    <Badge ><Text>3</Text></Badge>
-                    <Icon name="map" />
-                    <Text>Map</Text>
-                </Button>
-               
-                <Button onPress={() => Actions.orgMap({text:"map"})}>
-                    <Icon name="map" />
-                    <Text>Map</Text>
-                </Button>
-                 */}
-
             </FooterTab>
         </Footer>
     );
@@ -65,5 +63,5 @@ const mapStateToProps = state => ({
   index: state.list.selectedIndex,
   list: state.list.list,
 });
-  
+
 export default connect(mapStateToProps, bindAction)(NewFooter);

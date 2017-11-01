@@ -41,11 +41,9 @@ class Tour extends Component {
              </View>
 
              <View style={styles.btnView}>
-               {/*
                 <Button success style={styles.btn} onPress={() => this.props.navigation.navigate('StepOne')}>
                   <Text style={styles.btnChild}>Get Started</Text>
                 </Button>
-                */}
             </View>
            </Content>
        </Container>

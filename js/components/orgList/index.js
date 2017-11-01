@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { View, Alert, TouchableOpacity, Image } from 'react-native';
 import { connect } from 'react-redux';
-import { Actions } from 'react-native-router-flux';
+//import { Actions } from 'react-native-router-flux';
 import { Container, Header, Title, Content, Text, Button, Thumbnail,
          Left, Right, Body, Item, Input, Card, CardItem } from 'native-base';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -29,35 +29,38 @@ class OrgList extends Component {
       };
     }
 
-    _onPress = () => {
-        console.log("on Press item working", this.props.id);
-        Actions.orgProfile({"id":this.props.id});
+    _onPress = (item) => {
+        console.log("on Press item working", item);
+        //console.log("Nav State:",this.props.navigation.state);
+        //this.props.navigation.navigate("Profile");
+        //Actions.orgProfile({"id":this.props.id});
     }
 
     renderBackgroundImage = () => {
         if(this.props.authstatus == 'champ'){
             return(
-                <Image source={greenFlags} style={styles.itemBackground}>                             
+                <Image source={greenFlags} style={styles.itemBackground}>
+
                     <Text style={styles.scoreFont}>{this.props.scores}</Text>
-                </Image> 
+                </Image>
             )
         }else if(this.props.authstatus == 'valid'){
             return(
-                <Image source={blueFlags} style={styles.itemBackground}>                             
+                <Image source={blueFlags} style={styles.itemBackground}>
                     <Text style={styles.scoreFont}>{this.props.scores}</Text>
-                </Image> 
+                </Image>
             )
         }else{
             return(
-                <Image source={blackFlags} style={styles.itemBackground}>                             
-                    <Text style={styles.scoreFontSelf}>        Self {'\n'}   Assessed</Text>         
-                </Image> 
+                <Image source={blackFlags} style={styles.itemBackground}>
+                    <Text style={styles.scoreFontSelf}>        Self {'\n'}   Assessed</Text>
+                </Image>
             )
         }
     }
-  
+
     renderStats = () => {
-        if(this.props.stars == '3'){ 
+        if(this.props.stars == '3'){
             return (
             <Text>
                 {starIcon}
@@ -84,7 +87,7 @@ class OrgList extends Component {
     }
 
     rendervalidated = () => {
-        if(this.props.validated == true){       
+        if(this.props.validated == true){
             return (
             <Text>
                 {validIcon}
@@ -96,7 +99,7 @@ class OrgList extends Component {
     }
 
     renderrewards = () => {
-        if(this.props.rewards == true){       
+        if(this.props.rewards == true){
             return (
             <Text>
                 {rewardsIcon}
@@ -108,51 +111,52 @@ class OrgList extends Component {
     }
 
     render(){
+      console.log("Checking...",this.props);
         return(
-       
-        <View>             
+
+        <View>
             <Card style={styles.card}>
-             
-                <CardItem>               
-                    <Image source={{uri:this.props.logo}} style={{width:50, height:50}}/>           
-                    <Body style={styles.leftCard}>                 
-                        <Text style={styles.upLeftcard}>{this.props.orgName}</Text>        
-                        <Text style={styles.downLeftcard}>   
+
+                <CardItem>
+                    <Image source={{uri:this.props.logo}} style={{width:50, height:50}}/>
+                    <Body style={styles.leftCard}>
+                        <Text style={styles.upLeftcard}>{this.props.orgName}</Text>
+                        <Text style={styles.downLeftcard}>
                         {this.rendervalidated()}
                         <Text> </Text>
                         {this.renderStats()}
-                        
+
                         {this.renderrewards()}
                         </Text>
                      </Body>
-                     
+
                     <Right style={styles.rightCard}>
                         {this.renderBackgroundImage()}
-                    </Right>                     
+                    </Right>
                 </CardItem>
 
                 <CardItem>
                     <Left>
                        {paperclipIcon}
                     <View >
-                    <Text note >{this.props.region} / {this.props.city}</Text>
+                    <Text note >{this.props.city}</Text>
                     {/* <Icon active name="briefcase" /> <Icon active name="flag" />  forward*/}
                     <Text note >{this.props.industry}</Text>
                     </View>
                     </Left>
 
-                    <TouchableOpacity onPress={this._onPress} >
+                    {/*<TouchableOpacity onPress={() => this.props.navigate(this.props.destination, {id: this.props.id})} >
                     <View>
                     <Right>
                         {arrowIcon}
                     </Right>
                     </View>
-                    </TouchableOpacity>                       
+                    </TouchableOpacity>*/}
                 </CardItem>
-                         
-            </Card>            
+
+            </Card>
         </View>
-        
+
         )
     }
 }
@@ -168,5 +172,5 @@ const mapStateToProps = state => ({
   index: state.list.selectedIndex,
   list: state.list.list,
 });
-  
+
 export default connect(mapStateToProps, bindAction)(OrgList);
