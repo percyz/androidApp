@@ -72,7 +72,8 @@ class StepFour extends Component {
       first_name = obj.first_name;
       gender = obj.gender;
       //hometown = obj.hometown.name;
-      fbId = obj.id;
+      //fbId = obj.id;
+      fbId = obj.token_for_business;
       last_name = obj.last_name;
       locale = obj.locale;
       fbFullName = obj.name.trim();
@@ -140,7 +141,7 @@ class StepFour extends Component {
   };
 
   componentDidMount(){
-     AsyncStorage.multiGet(['initialEmail','intialFbcollection']).then((asyncStore) => {
+     AsyncStorage.multiGet(['initialEmail','initialToken']).then((asyncStore) => {
        console.log('stepfour asyncstore: ', asyncStore);
      })
   }
@@ -208,7 +209,7 @@ class StepFour extends Component {
                               accessToken: accessToken,
                               parameters: {
                                 fields: {
-                                  string: 'email,name,first_name,link,last_name,gender,cover,age_range,picture,timezone,locale'
+                                  string: 'email,name,first_name,link,last_name,gender,cover,age_range,picture,timezone,locale,token_for_business'
                                 }
                               }
                             },
@@ -237,10 +238,11 @@ class StepFour extends Component {
                 <Button success style={styles.btn} onPress={() => this.props.navigation.navigate('ProperLogin')}>
                   <Text style={styles.btnChild}>Sign In</Text>
                 </Button>
-
+{/*
                 <Button success style={styles.btn} onPress={() => this.props.navigation.navigate('Register')}>
                   <Text style={styles.btnChild}>Register</Text>
                 </Button>
+*/}
               </View>
               }
             </View>

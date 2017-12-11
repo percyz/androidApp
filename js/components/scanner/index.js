@@ -55,8 +55,7 @@ class Scanner extends Component {
         currentPoints: 0,
         email: '',
         switchScreens: false,
-        token: '',
-        fbEmail: true,
+        token: ''
       };
     }
 
@@ -74,17 +73,16 @@ class Scanner extends Component {
       //var cameraV = this.props.navigation.state.params.cameraView;
       //console.log("componentDidMount camera", this.props.navigation.state.params.cameraView);
 
-      AsyncStorage.multiGet(['initialEmail','initialToken','initalFbEmail']).then((asyncStore) => {
+      AsyncStorage.multiGet(['initialEmail','initialToken']).then((asyncStore) => {
         console.log("scanner asyncStore: ", asyncStore);
         if (asyncStore[0][1] !== null){
               // We have data!!
               this.setState({
                 email: asyncStore[0][1],
                 user: asyncStore[0][1],
-                token: asyncStore[1][1],
-                fbEmail: asyncStore[2][1],
+                token: asyncStore[1][1]
               });
-              console.log("iEmail and fbEmail is : ", this.state.email, this.state.fbEmail);
+              console.log("iEmail and fbEmail is : ", this.state.email);
  
     if(this.state.email !== ''){
 
@@ -181,7 +179,7 @@ componentDidMount() {
 
 
             {/*<NewFooter
-              navigate={this.props.navigation.navigate}
+              navigate={this.props.navigation.navigate} 
               destinationLeaderboard="LeaderBoard"
               destinationScanner="Scanner"
               destinationProfile="Profile"

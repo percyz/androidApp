@@ -12,7 +12,6 @@ import OrgList from '../orgList';
 import styles from './styles';
 
 GLOBAL = require('../../globals');
-var DEFAULT_URL = 'http://www.geia.nz/Leaderboard';
 var orgInfoComplete = [];
 var orgNamInd = [];
 const backgroundImage = require('../../../images/background.png');
@@ -339,7 +338,7 @@ class LeaderBoard extends Component {
 
     const { orgNames } = this.state;
     const regex = new RegExp(`${selectedNam.trim()}`, 'i');
-    //return orgNames.filter(film => (film.name.search(regex) || film.industry.search(regex)) >= 0);
+    //return orgNames.filter(film => (film.name.search(regex) || film.industry.search(regex)) >= 0); 
     const relativeNam = orgNames.filter(value => value.name.search(regex) >= 0);
     const relativeInd = orgNames.filter(value => value.industry.search(regex) >= 0);
     return relativeNamInd = relativeInd.concat(relativeNam);

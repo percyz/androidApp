@@ -3,7 +3,6 @@ import Login from "../components/login/";
 import ProperLogin from "../components/properLogin/";
 import Home from "../components/home/";
 import BlankPage from "../components/blankPage";
-import BlankPage2 from "../components/blankPage2";
 import Register from "../components/register";
 import Profile from "../components/editUser";
 import HomeDrawerRouter from "./HomeDrawerRouter";
@@ -14,11 +13,13 @@ import LeaderBoard from "../components/leaderBoard";
 import StepOne from "../components/stepOne";
 import StepTwo from "../components/stepTwo";
 import StepThree from "../components/stepThree";
+import Spin from "../components/spin";
 import Terms from "../components/terms";
 import UserPoints from "../components/userPoints";
 import Tour from "../components/tour";
 import StepFour from "../components/stepFour";
 import OrgList from "../components/orgList";
+import Trophy from "../components/trophy";
 import { StackNavigator } from "react-navigation";
 import { TabNavigator } from "react-navigation";
 import { Header, Left, Button, Icon, Body, Title, Right } from "native-base";
@@ -41,6 +42,7 @@ export default (StackNav = StackNavigator({
   StepTwo: { screen: StepTwo},
   StepThree: { screen: StepThree},
   StepFour: { screen: StepFour},
+  Spin: { screen: Spin},
   Tour: { screen: Tour},
   //End fo tour pages
   ProperLogin: { screen: ProperLogin },
@@ -53,6 +55,7 @@ export default (StackNav = StackNavigator({
     //},
   LeaderBoard: { screen: LeaderBoard},
   Scanner: { screen: Scanner},
+  Trophy: { screen: Trophy},
   Footer: {
     screen: (navigation) => <Footer {...navigation} />
   },
@@ -60,5 +63,4 @@ export default (StackNav = StackNavigator({
   //orgProfile: { screen: orgProfile },
   //OrgList: { screen: OrgList },
   //Profile: { screen: Profile }
-  BlankPage2: { screen: BlankPage2 }
 }));

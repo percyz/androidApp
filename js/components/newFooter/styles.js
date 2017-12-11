@@ -6,6 +6,10 @@ export default {
     backgroundColor: '#FBFAFA',
   },
   newfooter: {
-    backgroundColor: '#303030',
+    backgroundColor: GLOBAL.COLOR.GREEN,
+  },
+  icons: {
+    color: 'white',
+    fontSize: 35,
   }
 };

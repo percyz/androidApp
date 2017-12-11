@@ -1,11 +1,12 @@
 
 import React, { Component } from 'react';
-import { Image, Dimensions, Alert, AsyncStorage, TouchableOpacity, ScrollView } from 'react-native';
+import { Image, Dimensions, Alert, AsyncStorage, TouchableOpacity, ScrollView, TextInput } from 'react-native';
 import { connect } from 'react-redux';
 import { Container, Header, Title, Content, Text, Button, Left, Right,
   Body, Input, InputGroup, Item, ListItem, CheckBox, Spinner, View, Icon } from 'native-base';
 //import Icon from 'react-native-vector-icons/FontAwesome';
 import sha256 from 'crypto-js/sha256';
+import MapView from 'react-native-maps';
 import { openDrawer } from '../../actions/drawer';
 import DrawBar from "../DrawBar";
 import { DrawerNavigator, NavigationActions } from "react-navigation";
@@ -13,6 +14,7 @@ import NewFooter from '../newFooter';
 import styles from './styles';
 
 const scanIcon = require('../../../images/Scanner_Grey.png');
+const champ = require('../../../images/champMarker.png');
 
 class LeaderBoard extends Component {
 
@@ -29,16 +31,39 @@ class LeaderBoard extends Component {
           },
           orgNames: [],
           orgInfo: [],
+          region: {  
+            latitude: -45.8669784,
+            longitude: 170.51735800000006,
+            latitudeDelta: 0.0922,
+            longitudeDelta: 0.0421,
+          },
+          initialLatitude: -45.8788,
+          initialLongitude: 170.5028,
+          mapMarkerLoaded: false,
       };
   }
 
   componentWillMount() {
 
-    //StatusBar.setBarStyle('light-content', true);
-    {/*StatusBar.setBackgroundColor('#303030', true);*/}
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          this.setState({
+            initialLatitude: position.coords.latitude,
+            initialLongitude: position.coords.longitude,
+            region:{latitude: position.coords.latitude,longitude: position.coords.longitude,
+                    latitudeDelta: 0.0922, longitudeDelta: 0.0421},
+            locationError: null,
+          });
+          //console.log("position.coords.latitude", position.coords.latitude);
+        },
+        (error) => this.setState({ locationError: error.message }),
+        //console.log("position.coords.latitude error", this.state.locationError),
+        { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 },
+      );
 
       //GET
-      fetch("https://geiaiostest.herokuapp.com/new/orgs", {
+      //fetch("https://geiaiostest.herokuapp.com/new/orgs", {
+      fetch("https://geia-app.herokuapp.com/orgs", {
               method: "GET",
               mode: "cors",
               headers: {
@@ -58,12 +83,12 @@ class LeaderBoard extends Component {
                    orgInfoComplete = json;
                    console.log('complete is :',json)
                    console.log("orgInfo",this.state.orgInfo.length);
-                   /*if(this.state.orgInfo.length > 2){
+                   if(this.state.orgInfo.length > 2){
                        this.setState({
-                         viewLoaded:true,
-                         orgNames:json
+                         mapMarkerLoaded:true,
+                         //orgNames:json
                         });
-                   };*/
+                   };
                    //orgNamInd = orgNams.name.
                 });
             }else{
@@ -77,6 +102,7 @@ class LeaderBoard extends Component {
       })
   };
 
+/*
   toggleText() {
     if(this.state.toggle){
       return (
@@ -109,10 +135,23 @@ class LeaderBoard extends Component {
       )
     }
   }
-
+*/
   render() {
+    const { navigateTo } = this.props.navigation;
     var neworgs = "";
     console.log("this.state.orgInfo: ", this.state.orgInfo.length);
+    const orgMapData = [];
+    for(var i = 0; i < this.state.orgInfo.length; i++){
+      orgMapData.push({
+        latitude:this.state.orgInfo[i].latitude,
+        longitude:this.state.orgInfo[i].longitude,
+        title:this.state.orgInfo[i].name,
+        location:this.state.orgInfo[i].address.street + ' --- 10pts',
+        image:champ
+      });
+    };
+
+/*
     if(this.state.orgInfo.length == 0) {
       neworgs =
       <View>
@@ -158,6 +197,7 @@ class LeaderBoard extends Component {
       </View>
       );
     }
+*/
 
     return (
       <Container style={styles.container}>
@@ -170,7 +210,7 @@ class LeaderBoard extends Component {
         </Left>
 
         <Body style={styles.headerBody}>
-            <Icon style={{color: 'white', fontSize:30}} name="md-paper-plane" />
+            <Icon style={{color: 'white', fontSize:30}} name="ios-paper-plane" />
         </Body>
 
         <Right style={{flex:1}}>
@@ -178,31 +218,76 @@ class LeaderBoard extends Component {
         {/*
           <Button transparent onPress={this.props.openDrawer}>
             <Icon name="ios-menu" />
-          </Button>
+          </Button> 
           */}
         </Right>
       </Header>
 
 
 
-        <Content style={styles.subContainer}>
-          <View style={{flex: 0.8}}>
+        <Content style={styles.subContainer}>       
+          <View style={styles.mapView}>
+            {/*
             {this.toggleText()}
               {neworgs}
           </View>
 
           <View style={{flex: 0.2}}>
-            <TouchableOpacity  onPress={()=> this.props.navigation.goBack()}>
+
+            <TouchableOpacity  onPress={()=> this.props.navigation.navigate('Terms')}>
               <Image source={scanIcon} style={styles.newScan} />
             </TouchableOpacity>
+            */}
+
+            <MapView
+              style={styles.mapContent}
+              region={this.state.region}
+            >
+            {!this.state.mapMarkerLoaded? null :
+              <View>
+              <MapView.Marker
+                key={'Your Location'}
+                coordinate={{latitude:this.state.initialLatitude, longitude:this.state.initialLongitude}}
+                title={'Your Location'}
+                image={champ}
+              />
+              {orgMapData.map(marker => (
+                    <MapView.Marker
+                      key={marker.title}
+                      coordinate={{latitude: marker.latitude, longitude: marker.longitude}}
+                      title={marker.title}
+                      description={marker.location}
+                      image={marker.image}
+                    />
+               ))}
+               </View>
+               } 
+            </MapView>
+            
           </View>
+          <Header searchBar rounded style={styles.searchBar}>     
+          <Item>     
+              <Icon name="search" />
+              <TextInput 
+                      placeholder="Search industry/region/names ..." 
+                      placeholderTextColor='black'
+                      //onChangeText={this.onNamChange}
+                      //value={this.state.selectedNam} 
+                      style={styles.searchBarName}
+                      underlineColorAndroid='transparent'
+              />
+          </Item>
+          </Header>
+          
+
         </Content>
-      {/*<NewFooter
+
+      <NewFooter
         navigate={this.props.navigation.navigate}
         destinationLeaderboard="LeaderBoard"
-        destinationScanner="Scanner"
-        destinationProfile="Profile"
-      />*/}
+        destinationSpin="Spin"
+        destinationUserPoints="UserPoints"
+      />
       </Container>
     );
   }

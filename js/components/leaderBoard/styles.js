@@ -76,4 +76,26 @@ export default{
     alignItems: 'center',
     justifyContent: 'center',
   },
+  mapView: {
+    flex: 1, 
+    flexDirection: 'row',
+    //alignContent: 'center',  
+    justifyContent: 'center',
+    //paddingBottom: 0,
+    zIndex: 1,
+  },
+  mapContent: {
+    flex: 1,
+    flexDirection:'column',
+    width: GLOBAL.WIDTH,
+    height: GLOBAL.HEIGHT/1.4,
+  },
+  searchBar: {
+    backgroundColor: GLOBAL.COLOR.GREEN, 
+    zIndex:2,
+  },
+  searchBarName: {
+     width: GLOBAL.WIDTH / 1.5,
+     color: 'black',
+  },
 };

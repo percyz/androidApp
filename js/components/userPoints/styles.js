@@ -9,10 +9,10 @@ const deviceHeight = Dimensions.get('window').height;
 var subParagraphNum = '';
 var btnNum = '';
 if(deviceHeight > 600){
-  subParagraphNum = 50;
+  subParagraphNum = 40;
   btnNum = 5;
 }else {
-  subParagraphNum = 20;
+  subParagraphNum = 10;
   btnNum = 8;
 }
 
@@ -24,6 +24,15 @@ export default{
       backgroundColor: "transparent",
       zIndex:2,
       //flexDirection: 'column'
+  },
+  header: {
+    backgroundColor: GLOBAL.COLOR.GREEN
+  },
+  headerBody: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   shadow: {
     //flex: 1,
@@ -95,6 +104,8 @@ export default{
   },
   subParagraphView:{
     marginTop: subParagraphNum,
+    //textAlign: 'center',
+    alignItems: 'center',
   },
   subParagraph: {
     flex: 2,

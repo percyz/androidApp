@@ -30,21 +30,18 @@ class NewFooter extends Component {
   render() {
 
     const { props: { name, index, list } } = this;
-
+ 
     return (
         <Footer>
             <FooterTab style={styles.newfooter}>
+                <Button onPress={() => this.props.navigate(this.props.destinationSpin)} >
+                    <Icon name="ios-ionic" style={styles.icons} />
+                </Button>
+                <Button onPress={() => this.props.navigate(this.props.destinationUserPoints)} >
+                    <Icon name="ios-home" style={styles.icons} />
+                </Button>
                 <Button onPress={() => this.props.navigate(this.props.destinationLeaderboard)} >
-                    <Icon name="ios-apps" />
-                    <Text>Leaderboard</Text>
-                </Button>
-                <Button onPress={() => this.props.navigate(this.props.destinationProfile)} >
-                    <Icon name="ios-home" />
-                    <Text>Home</Text>
-                </Button>
-                <Button onPress={() => this.props.navigate(this.props.destinationScanner)} >
-                    <Icon name="ios-camera" />
-                    <Text>Scanner</Text>
+                    <Icon name="ios-paper-plane" style={styles.icons} />
                 </Button>
             </FooterTab>
         </Footer>

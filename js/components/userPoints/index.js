@@ -54,12 +54,13 @@ class UserPoints extends Component {
   }
 
   componentWillMount(){
-    console.log("called")
+    console.log("called");
+    /*
     if(!this.props.navigation.state.params){
       return ("")
     }
-    var newEmail = this.props.navigation.state.params.email
-    /*if(!this.props.navigation.state.params.points){
+    //var newEmail = this.props.navigation.state.params.email
+   if(!this.props.navigation.state.params.points){
       return ("")
     }*/
     //this.setState({points: this.props.navigation.state.params.points})
@@ -67,9 +68,10 @@ class UserPoints extends Component {
     AsyncStorage.multiGet(['initialUser','initialEmail','initialPoints']).then((asyncStore) => {
       console.log("userPoints asyncStore inital info: ", asyncStore);
       if (asyncStore[1][1] !== null && asyncStore[1][1].length > 0){
-        this.setState({user: asyncStore[0][1], points: asyncStore[2][1], email: asyncStore[1][1]})
+        this.setState({user: asyncStore[0][1], points: asyncStore[2][1], email: asyncStore[1][1]});
       }else {
-        this.setState({user: newEmail})
+        //this.setState({user: newEmail})
+        console.log("can not get initial email and points");
       }
     })
   }
@@ -107,12 +109,32 @@ class UserPoints extends Component {
 */
 
   render() {
-    if(!this.props.navigation.state.params){
+    if(!this.state.user){
       console.log("waiting....")
       return (<View style={styles.subContainer}></View>)
     }
     return (
       <Container>
+          <Header style={styles.header}>
+            <Left style={{flex:1}}>
+            <Button transparent onPress={() => this.props.navigation.goBack()}>
+              <Icon style={{color: 'white', fontSize:35}} name="ios-arrow-back" className="angle-left"/>
+            </Button>
+            </Left>
+
+            <Body style={styles.headerBody}>
+                <Icon style={{color: 'white', fontSize:30}} name="ios-home" />
+            </Body>
+
+            <Right style={{flex:1}}>
+              <Text> </Text>
+            {/*
+              <Button transparent onPress={this.props.openDrawer}>
+                <Icon name="ios-menu" />
+              </Button>
+              */}
+            </Right>
+          </Header>
 
         <Content style={styles.subContainer}>
         <Image source={greenBackground} style={styles.shadow} />
@@ -122,26 +144,48 @@ class UserPoints extends Component {
             </Text>
           </View>
 
-         <View style={{marginTop:10}}>
-           <Text style={styles.points}>
-               {this.state.points}
-           </Text>
-         </View>
+          <View style={{marginTop:10}}>
+            <Text style={{fontSize:14, color:'white', textAlign:'center'}}>
+                Geia Points
+            </Text>
+          </View>
+          
+          <View style={{marginTop:3}}>
+            <Text style={styles.points}>
+                {this.state.points}
+            </Text>
+          </View>
 
-         <View style={{marginTop:6}}>
-           <Text style={{fontSize:15, color:'white', textAlign:'center'}}>
-               Geia Points
-           </Text>
-         </View>
+          <View style={{marginTop:3}}>
+            <Text style={styles.points}>
+              <Icon style={{color: 'white', fontSize:60}} name="ios-cart" />
+            </Text>
+          </View>
+
+          <View style={{marginTop:3}}>
+            <Text style={{fontSize:14, color:'white', textAlign:'center'}}>
+                Your Rewards
+            </Text>
+          </View>
 
          <View style={styles.subParagraphView}>
-           <Text style={styles.subParagraph}>
-               Prize Draw 3pm
+           <Text style={{color:'white', fontSize:20}}>
+               Next Prize Draw
            </Text>
-           <Text style={styles.subParagraph}>
-               Every Week Live On
+           <Text style={{color:'white', fontSize:30}}>
+               3   11   5 
+           </Text>
+           <Text style={{color:'white', fontSize:14}}>
+               Days     Hours     Mins 
+           </Text>
+           <Text style={{color:'white', fontSize:14, marginTop:10}}>
+               Prize Pool:
+           </Text>
+           <Text style={{color:'white', fontSize:14}}>
+               3x $50 Cash Prize 
            </Text>
          </View>
+{/*
          <TouchableOpacity onPress={() => Linking.openURL('https://www.facebook.com/geia.ltd/')}>
           <Image source={fbIcon} style={styles.fbButton} />
          </TouchableOpacity>
@@ -149,16 +193,19 @@ class UserPoints extends Component {
          <TouchableOpacity onPress={() => this.props.navigation.goBack()}>
           <Image source={scanIcon}  style={styles.scannerButton} />
          </TouchableOpacity>
-
-         <View style={styles.newScan}>
-        {/*
+  
          <TouchableOpacity  onPress={()=> this.props.navigation.navigate('Scanner', { cameraView: true})}> 
-        
-        <TouchableOpacity  onPress={()=> this.props.navigation.navigate('Scanner')}> 
-        */}
+*/}
 
-         </View>
+        
         </Content>
+
+        <NewFooter
+          navigate={this.props.navigation.navigate}
+          destinationLeaderboard="LeaderBoard"
+          destinationSpin="Spin"
+          destinationUserPoints="UserPoints"
+        />
      </Container>
     );
   }

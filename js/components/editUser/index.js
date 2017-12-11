@@ -55,7 +55,7 @@ class Profile extends Component {
   async userLogout() {
     console.log('logout AsyncStorage error: ');
     try {
-      let keys = ['initialEmail','initialPoints','initialUser','intalEmail', 'initialToken']
+      let keys = ['initialEmail','initialPoints','initialUser', 'initialToken']
       await AsyncStorage.multiRemove(keys);
       AsyncStorage.multiGet(['initialEmail','initialPoints','initialUser']).then((asyncStore) => {
         console.log("editUser asyncStore: ", asyncStore);
@@ -234,14 +234,14 @@ class Profile extends Component {
                   </View>
               </Button>
               <Text />
-{/*
+{/* */}
               <View style={{alignItems:'center'}}>
               <LoginButton
-                readPermissions={["email","public_profile","user_birthday","user_location","user_hometown"]}
+                readPermissions={["email","public_profile"]}
                 onLogoutFinished={() => this.userLogout()}
               />
               </View>
-*/}
+
             <TouchableOpacity onPress={()=> this.props.navigation.goBack()}>
               <Image source={scanIcon} style={styles.newScan} />
             </TouchableOpacity>

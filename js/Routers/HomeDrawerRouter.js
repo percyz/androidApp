@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Home from "../components/home/";
-import BlankPage2 from "../components/blankPage2";
+import BlankPage from "../components/blankPage";
 import Register from '../components/register';
 import { DrawerNavigator } from "react-navigation";
 import DrawBar from "../components/DrawBar";

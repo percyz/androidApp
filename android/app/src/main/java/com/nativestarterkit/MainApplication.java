@@ -18,6 +18,8 @@ import java.util.Arrays;
 import java.util.List;
 import com.microsoft.codepush.react.CodePush;
 
+import com.airbnb.android.react.maps.MapsPackage;
+
 public class MainApplication extends Application implements ReactApplication {
 
   private static CallbackManager mCallbackManager = CallbackManager.Factory.create();
@@ -43,6 +45,7 @@ public class MainApplication extends Application implements ReactApplication {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
           new RCTCameraPackage(),
+          new MapsPackage(),
           new FBSDKPackage(mCallbackManager),
           new CodePush("j6mfufxuY_pn1harLXXp5MaRxMtve701fc78-f2e4-47bf-96ed-ac50dfd6b156", MainApplication.this, BuildConfig.DEBUG)
       );

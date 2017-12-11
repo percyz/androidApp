@@ -9,10 +9,10 @@ const deviceHeight = Dimensions.get('window').height;
 var titleNum = '';
 var btnNum = '';
 if(deviceHeight > 600){
-  titleNum = 5;
+  titleNum = 8;
   btnNum = 8;
 }else {
-  titleNum = 8;
+  titleNum = 10;
   btnNum = 8;
 }
 
@@ -28,10 +28,10 @@ export default {
     right: 0,
     width: GLOBAL.WIDTH,
     height: GLOBAL.HEIGHT,
-    backgroundColor: GLOBAL.COLOR.GREEN,
+    //backgroundColor: GLOBAL.COLOR.GREEN,
   },
   shadow: {
-    marginTop: 20,
+    //marginTop: -10,
     marginBottom: 20,
     //flex: 1,
     //width: GLOBAL.WIDTH / 3,
@@ -54,20 +54,44 @@ export default {
     marginTop: GLOBAL.HEIGHT / titleNum,
   },
   paragraphTitle: {
-    flex: 2,
+    flex: 1,
     textAlign: 'center',
     alignItems: 'center',
-    marginTop: 10,
+    marginTop:  GLOBAL.HEIGHT / titleNum,
     color: 'white',
     fontSize: GLOBAL.BIG,
   },
   paragraph: {
-    flex: 2,
+    flex: 1,
     textAlign: 'center',
     alignItems: 'center',
     marginTop: 10,
     color: 'white',
-    fontSize:GLOBAL.BIG,
+    fontSize:GLOBAL.MEDIUM,
+  },
+  paragraphLine2: {
+    flex: 1,
+    textAlign: 'center',
+    alignItems: 'center',
+    marginTop: -3,
+    color: 'white',
+    fontSize: GLOBAL.MEDIUM,
+  },
+  subParagraph: {
+    flex: 1,
+    textAlign: 'center',
+    alignItems: 'center',
+    marginTop: 10,
+    color: 'white',
+    fontSize: GLOBAL.SMALL,
+  },
+  subParagraphLine2: {
+    flex: 2,
+    textAlign: 'center',
+    alignItems: 'center',
+    marginTop: -3,
+    color: 'white',
+    fontSize: GLOBAL.SMALL,
   },
   input: {
     flex: 1,
@@ -79,19 +103,70 @@ export default {
     color: '#a5a5a5',
   },
   btnView: {
-    marginTop: GLOBAL.HEIGHT / btnNum,
+    height: GLOBAL.HEIGHT / 3,
+     backgroundColor: GLOBAL.COLOR.GREEN,
+    //marginTop: GLOBAL.HEIGHT / btnNum,
   },
   btn: {
-    flex: 1,
+    //flex: 1,
     alignSelf: 'center',
     backgroundColor: GLOBAL.COLOR.GREEN,
     borderRadius:10,
     borderWidth: 1,
     borderColor: '#fff',
-    width: 200
+    width: 200,
+    marginTop: 20,
   },
   btnChild: {
     flex: 1,
-    textAlign: 'center'
+    textAlign: 'center',
+    color:'white'
+  },
+  wrapper: {
+    flex: 1,
+    //backgroundColor: 'green',
+    width: GLOBAL.WIDTH,
+    height: GLOBAL.HEIGHT / 1.5,
+  },
+  slide1: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection:'column',
+    backgroundColor: GLOBAL.COLOR.GREEN,
+    width: GLOBAL.WIDTH,
+    height: GLOBAL.HEIGHT / 1.5,
+  },
+  slide2: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection:'column',
+    backgroundColor: GLOBAL.COLOR.GREEN,
+    width: GLOBAL.WIDTH,
+    height: GLOBAL.HEIGHT / 1.5,
+  },
+  slide3: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection:'column',
+    backgroundColor: GLOBAL.COLOR.GREEN,
+    width: GLOBAL.WIDTH,
+    height: GLOBAL.HEIGHT / 1.5,
+  },
+  slide4: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection:'column',
+    backgroundColor: GLOBAL.COLOR.GREEN,
+    width: GLOBAL.WIDTH,
+    height: GLOBAL.HEIGHT / 1.5,
+  },
+  text: {
+    color: 'black',
+    fontSize: 30,
+    fontWeight: 'bold',
   }
 };
